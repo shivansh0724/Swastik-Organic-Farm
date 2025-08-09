@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swasthik Organic Farm</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(to bottom right, #e0ffe0, #ffffff);
+      color: #333;
+      padding: 0;
+      margin: 0;
+    }
+    .promo-banner {
+      background: #d4f5dd;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      color: #2f855a;
+    }
+    header.hero {
+      background-image: url('images/hero.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    header.hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 6px #000;
+    }
+    header.hero p {
+      font-size: 1.2rem;
+      text-shadow: 1px 1px 3px #000;
+    }
+    #main-site {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
+    nav {
+      text-align: center;
+      margin: 20px 0;
+    }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #2f855a;
+      font-weight: bold;
+    }
+    .product {
+      background: #f0fff4;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .product:hover {
+      transform: scale(1.02);
+    }
+    .product img {
+      width: 100px;
+      border-radius: 10px;
+    }
+    button {
+      background: #38a169;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #2f855a;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      background: #fefcbf;
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 5px;
+    }
+    .btn-remove {
+      background: #e53e3e;
+      padding: 5px 10px;
+      border-radius: 5px;
+      color: white;
+      border: none;
+    }
+    section.details {
+      padding: 20px;
+      text-align: center;
+    }
+    section.details ul {
+      list-style: none;
+      padding: 0;
+    }
+    #login-screen {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="promo-banner">
+    🚚 Free Delivery in Sonipat for Orders Above ₹300! 🐃 Fresh from the Farm Daily!
+  </div>
+
+  <header class="hero">
+    <h1>Welcome to Swasthik Organic Farm</h1>
+    <p>Fresh Buffalo Dairy Products from Ridhau Village, Sonipat, Haryana</p>
+  </header>
+
+  <section class="details">
+    <h2>Why Choose Swasthik?</h2>
+    <ul>
+      <li>✅ 100% Organic & Preservative-Free</li>
+      <li>✅ Buffaloes raised in clean, village pastures</li>
+      <li>✅ Fast Delivery in Sonipat</li>
+      <li>✅ Trusted by 100+ local families</li>
+    </ul>
+  </section>
+
+  <div id="main-site">
+    <nav>
+      <a href="#products">Products</a>
+      <a href="#cart">Cart</a>
+      <a href="#order">Order</a>
+    </nav>
+
+    <section id="products">
+      <h2>Our Products</h2>
+      <div class="product" data-name="Buffalo Milk" data-price="85">
+        <img src="images/buffalo-milk.jpg" alt="Buffalo Milk">
+        <div>
+          <p>₹85/kg</p>
+          <p>Rich, creamy and packed with nutrients. Sourced fresh daily from our well-cared-for buffaloes.</p>
+          <button onclick="addToCart(this)">Add to Cart</button>
+        </div>
+      </div>
+      <div class="product" data-name="Ghee" data-price="1600">
+        <img src="images/ghee.jpg" alt="Ghee">
+        <div>
+          <p>₹1600/kg</p>
+          <p>Pure hand-churned ghee with a golden texture and aroma, made from traditional methods.</p>
+          <button onclick="addToCart(this)">Add to Cart</button>
+        </div>
+      </div>
+      <div class="product" data-name="Curd" data-price="110">
+        <img src="images/curd.jpg" alt="Curd">
+        <div>
+          <p>₹110/kg</p>
+          <p>Thick, creamy, probiotic-rich curd — perfect for digestion and gut health.</p>
+          <button onclick="addToCart(this)">Add to Cart</button>
+        </div>
+      </div>
+      <div class="product" data-name="Lassi" data-price="40">
+        <img src="images/lassi.jpg" alt="Lassi">
+        <div>
+          <p>₹40/kg</p>
+          <p>Cool and refreshing lassi made with farm-fresh curd — ideal for summer hydration.</p>
+          <button onclick="addToCart(this)">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="cart">
+      <h2>Your Cart</h2>
+      <ul id="cart-list"></ul>
+      <p>Total: ₹<span id="total">0</span></p>
+      <button onclick="checkout()">Checkout</button>
+    </section>
+
+   <!-- Enhanced Order Section -->
+<section id="order" style="display:none; padding: 20px;">
+  <h2 style="text-align:center; margin-bottom: 20px;">📦 Place Your Order</h2>
+
+  <div style="max-width: 500px; margin: auto; background: #f0fff4; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <label for="phone" style="display:block; margin-bottom: 5px; font-weight: 600;">📱 Phone Number:</label>
+    <input type="tel" id="phone" placeholder="Enter your phone number" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc; margin-bottom:15px;">
+
+    <label for="location" style="display:block; margin-bottom: 5px; font-weight: 600;">📍 Delivery Address:</label>
+    <input type="text" id="location" placeholder="Enter your full address" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc; margin-bottom:15px;">
+
+    <label for="payment-method" style="display:block; margin-bottom: 5px; font-weight: 600;">💳 Payment Method:</label>
+    <select id="payment-method" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc; margin-bottom:20px;">
+      <option value="cod">Cash on Delivery</option>
+      <option value="upi">UPI Apps (GPay, PhonePe, Paytm)</option>
+    </select>
+
+    <button onclick="placeOrder()" style="width:100%; padding:12px; background:#38a169; color:white; font-weight:600; border:none; border-radius:6px;">✅ Confirm Order</button>
+
+    <div id="confirmation" style="margin-top:20px; display:none; text-align:center; font-weight:600; color:#2f855a;"></div>
+  </div>
+  <label for="name" style="display:block; margin-bottom: 5px; font-weight: 600;">👤 Full Name:</label>
+<input type="text" id="name" placeholder="Enter your full name" style="width:100%; padding:10px; border-radius:6px; border:1px solid #ccc; margin-bottom:15px;">
+
+</section>
+
+  </div>
+
+  <script>
+    let cart = [];
+
+    function addToCart(button) {
+      const product = button.closest('.product');
+      const name = product.getAttribute('data-name');
+      const price = parseInt(product.getAttribute('data-price'));
+      cart.push({ name, price });
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartList = document.getElementById('cart-list');
+      const totalDisplay = document.getElementById('total');
+      cartList.innerHTML = '';
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price;
+        const li = document.createElement('li');
+        li.innerHTML = `<div class="cart-item">${item.name} - ₹${item.price} <button class='btn-remove' onclick='removeItem(${index})'>X</button></div>`;
+        cartList.appendChild(li);
+      });
+      totalDisplay.textContent = total;
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Your cart is empty.');
+        return;
+      }
+      document.getElementById('order').style.display = 'block';
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function placeOrder() {
+      const notify = new Audio('https://www.soundjay.com/buttons/sounds/button-3.mp3');
+      notify.play();
+      notify.addEventListener('ended', () => alert('🔔 Order notification played.'))
+      const phone = document.getElementById('phone').value;
+      const location = document.getElementById('location').value;
+      const paymentMethod = document.getElementById('payment-method').value;
+      if (!phone || !location) {
+        alert('Please enter your phone and location.');
+        return;
+      }
+      const confirmation = document.getElementById('confirmation');
+      confirmation.innerHTML = `<p>✅ Order placed successfully! Payment via <strong>${paymentMethod.toUpperCase()}</strong>. We will deliver to: ${location}</p>`;
+      confirmation.style.display = 'block';
+      cart = [];
+      updateCart();
+    }
+  </script>
+</body>
+</html>
